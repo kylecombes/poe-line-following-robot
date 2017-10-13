@@ -2,12 +2,12 @@
 #include <Adafruit_MotorShield.h>
 #include "utility/Adafruit_MS_PWMServoDriver.h"
 
-#define LEFT_WHEEL (4)  // this is the M1 pin on motor shield
-#define RIGHT_WHEEL (3) // this is the M2 on motor shield
+#define LEFT_WHEEL (1)  // this is the M1 pin on motor shield
+#define RIGHT_WHEEL (2) // this is the M2 on motor shield
 #define SENSOR_L A0 // left IR sensor pin
 #define SENSOR_R A1 // right IR sensor pin
-#define DEFAULT_PWM_SPEED 30 // the default speed to move the wheels at
-#define PWM_DELTA 20 // the amount to increase a wheel by if its sensor sees the tape
+#define DEFAULT_PWM_SPEED 40 // the default speed to move the wheels at
+#define PWM_DELTA 30 // the amount to increase a wheel by if its sensor sees the tape
 #define DELAY_BTWN_READINGS 20 // ms to wait between IR readings and motor speed adjustments
 #define IR_SENSOR_READING_COUNT 1 // number of readings to take and average before returning IR sensor reading value
 #define TAPE_DETECTION_THRESHOLD 800 // IR sensor readings above this mean we're looking at black tape
