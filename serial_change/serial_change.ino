@@ -39,7 +39,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  // Adjust parameter based on serial input
+//  // Adjust parameter based on serial input
 //if (Serial.available() > 0){
 //  Serial.print("Changing base Speed to:");
 //  command = Serial.readString();
@@ -78,16 +78,16 @@ void loop() {
     setWheelSpeed(LEFT_WHEEL, leftWheelSpeed);
     setWheelSpeed(RIGHT_WHEEL, rightWheelSpeed);
 
-//Print everything to Serial for plotting
-Serial.print(millis());
-Serial.print("\t");
-Serial.print(leftSensorReading);
-Serial.print("\t");
-Serial.print(rightSensorReading);
-Serial.print("\t");
-Serial.print(leftWheelSpeed);
-Serial.print("\t");
-Serial.println(rightWheelSpeed);
+////Print everything to Serial for plotting
+//Serial.print(millis());
+//Serial.print("\t");
+//Serial.print(leftSensorReading);
+//Serial.print("\t");
+//Serial.print(rightSensorReading);
+//Serial.print("\t");
+//Serial.print(leftWheelSpeed);
+//Serial.print("\t");
+//Serial.println(rightWheelSpeed);
 
     lastReadTime = millis();
   }
