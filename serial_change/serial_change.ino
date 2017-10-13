@@ -6,11 +6,15 @@
 #define RIGHT_WHEEL (3) // this is the M2 on motor shield
 #define SENSOR_L A0 // left IR sensor pin
 #define SENSOR_R A1 // right IR sensor pin
-#define DEFAULT_PWM_SPEED 30 // the default speed to move the wheels at
+//#define DEFAULT_PWM_SPEED 30 // the default speed to move the wheels at
 #define PWM_DELTA 20 // the amount to increase a wheel by if its sensor sees the tape
 #define DELAY_BTWN_READINGS 20 // ms to wait between IR readings and motor speed adjustments
 #define IR_SENSOR_READING_COUNT 1 // number of readings to take and average before returning IR sensor reading value
 #define TAPE_DETECTION_THRESHOLD 800 // IR sensor readings above this mean we're looking at black tape
+
+int DEFAULT_PWM_SPEED = 30; // the base wheel speed; no longer a constant.
+String command; // will accept string input from serial monitor
+//This should change with serial input. We'll see how it goes.
 
 // Create the motor shield object with the default I2C address
 Adafruit_MotorShield AFMS = Adafruit_MotorShield();
@@ -27,14 +31,21 @@ void setup() {
   Serial.begin(9600);
   // Start talking to the motorshield
   AFMS.begin();  // create with the default frequency 1.6KHz
-  
+  Serial.println("Change base speed by typing in the Serial monitor. The default value is 30; inputting a non-integer will make the robot not turn");
+  Serial.println("Mass printing in order of:");
+  Serial.println("Time,   LSense,   RSense,   LMotor,   RMotor");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //Drive in a circle (one is forward, one is reverse)
-//  Serial.input();
 
+  // Adjust parameter based on serial input
+if (Serial.available() > 0){
+  Serial.print("Changing base Speed to:");
+  command = Serial.readString();
+  DEFAULT_PWM_SPEED = command.toInt();
+  Serial.println(DEFAULT_PWM_SPEED);
+}
 
   // Update the motor speeds
   long elapsedTime = millis() - lastReadTime;
@@ -66,6 +77,17 @@ void loop() {
     // Run the wheels at the returned speed
     setWheelSpeed(LEFT_WHEEL, leftWheelSpeed);
     setWheelSpeed(RIGHT_WHEEL, rightWheelSpeed);
+
+//Print everything to Serial for plotting
+Serial.print(millis());
+Serial.print("\t");
+Serial.print(leftSensorReading);
+Serial.print("\t");
+Serial.print(rightSensorReading);
+Serial.print("\t");
+Serial.print(leftWheelSpeed);
+Serial.print("\t");
+Serial.println(rightWheelSpeed);
 
     lastReadTime = millis();
   }
